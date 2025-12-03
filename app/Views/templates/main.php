@@ -8,12 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     
     <style>
-        /* Estilos personalizados */
         .navbar-brand span { color: #dc3545; font-weight: 900; font-style: italic; }
         .user-avatar { width: 35px; height: 35px; object-fit: cover; border: 2px solid #dc3545; padding: 1px;}
-        .dropdown-item.text-danger:hover { background-color: #dc3545; color: white !important; }
-        
-        /* Ajuste para o rodapé ficar sempre embaixo */
         body { background-color: #f8f9fa; min-height: 100vh; display: flex; flex-direction: column; }
         footer { margin-top: auto; }
     </style>
@@ -32,16 +28,13 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                    
                     <li class="nav-item">
-                        <a class="nav-link px-3 active" aria-current="page" href="<?= base_url() ?>">Home</a>
+                        <a class="nav-link px-3 active" href="<?= base_url() ?>">Home</a>
                     </li>
 
                     <?php if (session()->get('logged_in')): ?>
-                        
                         <li class="nav-item dropdown ms-lg-3">
                             <?php 
-                                // Lógica da Foto: Se não tiver, gera avatar com iniciais
                                 $nomeUser = session()->get('nome') ?? 'Usuário';
                                 $fotoSalva = session()->get('foto');
                                 $fotoUrl = $fotoSalva ? base_url('uploads/usuarios/' . $fotoSalva) : 'https://ui-avatars.com/api/?name=' . urlencode($nomeUser) . '&background=0D6EFD&color=fff';
@@ -61,13 +54,14 @@
                                             <i class="bi bi-speedometer2 me-2"></i> Painel Admin
                                         </a>
                                     </li>
-                                <?php else: ?>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bi bi-person me-2"></i> Meus Dados
-                                        </a>
-                                    </li>
+                                    <li><hr class="dropdown-divider border-secondary"></li>
                                 <?php endif; ?>
+
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url('perfil') ?>">
+                                        <i class="bi bi-person-circle me-2"></i> Meus Dados
+                                    </a>
+                                </li>
 
                                 <li><hr class="dropdown-divider border-secondary"></li>
                                 
@@ -78,14 +72,9 @@
                                 </li>
                             </ul>
                         </li>
-
                     <?php else: ?>
-                        <li class="nav-item ms-lg-2">
-                            <a class="nav-link" href="<?= base_url('login') ?>">Entrar</a>
-                        </li>
-                        <li class="nav-item ms-lg-2">
-                            <a class="btn btn-danger px-4 rounded-pill fw-bold" href="<?= base_url('cadastro') ?>">Cadastre-se</a>
-                        </li>
+                        <li class="nav-item ms-lg-2"><a class="nav-link" href="<?= base_url('login') ?>">Entrar</a></li>
+                        <li class="nav-item ms-lg-2"><a class="btn btn-danger px-4 rounded-pill fw-bold" href="<?= base_url('cadastro') ?>">Cadastre-se</a></li>
                     <?php endif; ?>
                 </ul>
             </div>
@@ -98,15 +87,7 @@
 
     <footer class="bg-dark text-white text-center py-4">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-md-start mb-3 mb-md-0">
-                    <h5 class="fw-bold mb-1">CAR <span class="text-danger">&</span> CAR</h5>
-                    <small class="text-white-50">Transparência e qualidade na sua compra.</small>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <small class="text-white-50">&copy; <?= date('Y') ?> Loja Car And Car.</small>
-                </div>
-            </div>
+            <small>&copy; <?= date('Y') ?> Loja Car And Car.</small>
         </div>
     </footer>
 

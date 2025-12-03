@@ -27,19 +27,26 @@
                     <h5 class="card-title fw-bold mb-3"><i class="bi bi-gear-fill me-2"></i>Ficha Técnica</h5>
                     <ul class="list-group list-group-flush bg-transparent">
                         <li class="list-group-item bg-transparent d-flex justify-content-between">
-                            <strong>Marca:</strong> <span><?= $anuncio['marca'] ?></span></li>
+                            <strong>Marca:</strong> <span><?= $anuncio['marca'] ?></span>
+                        </li>
                         <li class="list-group-item bg-transparent d-flex justify-content-between">
-                            <strong>Modelo:</strong> <span><?= $anuncio['modelo'] ?></span></li>
+                            <strong>Modelo:</strong> <span><?= $anuncio['modelo'] ?></span>
+                        </li>
                         <li class="list-group-item bg-transparent d-flex justify-content-between">
-                            <strong>Versão:</strong> <span><?= $anuncio['versao'] ?? 'N/A' ?></span></li>
+                            <strong>Versão:</strong> <span><?= $anuncio['versao'] ?? 'N/A' ?></span>
+                        </li>
                         <li class="list-group-item bg-transparent d-flex justify-content-between"><strong>Ano:</strong>
-                            <span><?= $anuncio['ano_fabricacao'] ?>/<?= $anuncio['ano_modelo'] ?></span></li>
+                            <span><?= $anuncio['ano_fabricacao'] ?>/<?= $anuncio['ano_modelo'] ?></span>
+                        </li>
                         <li class="list-group-item bg-transparent d-flex justify-content-between"><strong>Cor:</strong>
-                            <span><?= $anuncio['cor'] ?></span></li>
+                            <span><?= $anuncio['cor'] ?></span>
+                        </li>
                         <li class="list-group-item bg-transparent d-flex justify-content-between">
-                            <strong>Combustível:</strong> <span><?= $anuncio['combustivel'] ?></span></li>
+                            <strong>Combustível:</strong> <span><?= $anuncio['combustivel'] ?></span>
+                        </li>
                         <li class="list-group-item bg-transparent d-flex justify-content-between"><strong>KM:</strong>
-                            <span><?= number_format($anuncio['km_atual'], 0, ',', '.') ?> km</span></li>
+                            <span><?= number_format($anuncio['km_atual'], 0, ',', '.') ?> km</span>
+                        </li>
                         <li class="list-group-item bg-transparent d-flex justify-content-between"><strong>Final
                                 Placa:</strong> <span><?= substr($anuncio['placa'], -1) ?></span></li>
                     </ul>
@@ -47,10 +54,16 @@
             </div>
 
             <div class="d-grid gap-2">
-                <button onclick="alert('Não possui whatsapp, anuncio <?= $anuncio['modelo'] ?>')"
-                    class="btn btn-success btn-lg fw-bold">
-                    <i class="bi bi-whatsapp me-2"></i> Tenho Interesse
-                </button>
+                <?php if (session()->get('logged_in')): ?>
+                    <a href="<?= base_url('compra/confirmar/' . $anuncio['id']) ?>" class="btn btn-success btn-lg fw-bold"
+                        onclick="return confirm('Tem certeza que deseja comprar este veículo por R$ <?= number_format($anuncio['preco'], 2, ',', '.') ?>?');">
+                        <i class="bi bi-cart-check me-2"></i> COMPRAR AGORA
+                    </a>
+                <?php else: ?>
+                    <a href="<?= base_url('login') ?>" class="btn btn-warning btn-lg fw-bold">
+                        Faça Login para Comprar
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

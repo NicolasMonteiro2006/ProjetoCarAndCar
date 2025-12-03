@@ -7,18 +7,9 @@ class VeiculoModel extends Model
     protected $table = 'veiculos';
     protected $primaryKey = 'id';
     
-    protected $allowedFields = [
-        'placa', 
-        'marca', 
-        'modelo', 
-        'versao', 
-        'ano_fabricacao', 
-        'ano_modelo', 
-        'cor', 
-        'combustivel'
-    ];
+    protected $allowedFields = ['marca', 'modelo', 'versao', 'combustivel'];
     
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
-    protected $updatedField  = ''; 
+    protected $updatedField  = 'updated_at'; 
 }

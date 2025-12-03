@@ -25,11 +25,30 @@ $routes->get('consertar', 'Login::consertarSenha');
 
 $routes->post('login/autenticar', 'Login::autenticar');
 
+$routes->get('atualizar-banco', 'Home::atualizarBanco');
+
 $routes->get('cadastro', 'Cadastro::index');
 
 $routes->post('cadastro/salvar', 'Cadastro::salvar');
 
+$routes->get('compra/confirmar/(:num)', 'Compra::confirmar/$1');
+
+$routes->get('perfil', 'Perfil::index');
+$routes->post('perfil/salvar', 'Perfil::salvar');
+
+$routes->group('admin', ['filter' => 'auth'], function($routes) {
+
+    $routes->get('usuarios', 'Admin\Usuarios::index');
+    $routes->get('usuarios/tornarAdmin/(:num)', 'Admin\Usuarios::tornarAdmin/$1');
+    $routes->get('usuarios/removerAdmin/(:num)', 'Admin\Usuarios::removerAdmin/$1');
+});
+
 $routes->get('logout', 'Login::logout');
+
+
+    $routes->get('usuarios', 'Admin\Usuarios::index');
+    $routes->get('usuarios/tornarAdmin/(:num)', 'Admin\Usuarios::tornarAdmin/$1');
+    $routes->get('usuarios/removerAdmin/(:num)', 'Admin\Usuarios::removerAdmin/$1');
 
 $routes->group('admin', ['filter' => 'auth'], function($routes) {
     
